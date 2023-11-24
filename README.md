@@ -1,4 +1,4 @@
-A fork of the [visa_web_scraper|https://github.com/Ed1123/visa_web_scraper] by [Ed1123|https://github.com/Ed1123].
+A fork of the [visa_web_scraper](https://github.com/Ed1123/visa_web_scraper) by [Ed1123](https://github.com/Ed1123).
 
 # Main improvements/changes
 
