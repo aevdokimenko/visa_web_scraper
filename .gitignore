@@ -1,5 +1,5 @@
 .env
 archive
 __pycache__
-nohup.out
 debugging
+.gitattributes
