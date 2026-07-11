@@ -58,6 +58,7 @@ def is_logged_in(url):
             prn('Logging in.')
             # Clicking the first prompt, if there is one
             try:
+                time.sleep(1)  # Wait for the prompt to appear
                 sign_in_ok = driver.find_element("xpath",
                     '/html/body/div[7]/div[3]/div/button')
                 if sign_in_ok:
@@ -72,6 +73,7 @@ def is_logged_in(url):
 
                 policy_confirmed.click()
                 # Clicking 'Sign in'
+                time.sleep(1)  # Wait for the page to process the login information
                 driver.find_element("xpath",
                     '//*[@id="sign_in_form"]/p[1]/input').click()
 
@@ -90,7 +92,10 @@ def notify_about_appointment(url, appts = None):
     global cell_text
     city = url[0]
     link = base_url+url[1]
-    msg = f'An appointment was found in {city}. \nClick here to see it: {link}\n{" | ".join(appts)}'
+    msg = f'An appointment was found in {city}. \nClick here to see it: {link}\n'
+    if appts:
+        msg += "Available appointments:\n" + "\n".join(appts) + f"\n({' | '.join(appts)})"
+
     prn(msg)
     send_message(msg)
     send_message(cell_text)
@@ -121,7 +126,7 @@ def is_appointment_available(u):
     except Exception as e:
         print_exception(e, "Cannot find cell")
         return False
-    if "No Appointments Available" in cell_text:
+    if cell_text == '!First Available Appointments\nAstana No Appointments Available\nAlmaty No Appointments Available':
         return False
     print(cell_text)
     # Can add additional logic here if needed
@@ -153,7 +158,9 @@ def is_reschedule_available(u):
         # div_error = driver.find_element(By.ID, "consulate_date_time_not_available")
         # div_note = driver.find_element(By.ID, "appointments_consulate_notes")
         # div_list = driver.find_element(By.ID, "consulate_date_time")
-        txt = driver.find_element(By.ID, "appointments_consulate_appointment_date")
+        txt = driver.find_element(By.CLASS_NAME, "noPaymentAcceptedMessage")
+
+
         time.sleep(1)
         txt.click()
         class_name = "ui-datepicker-group-first"
@@ -235,8 +242,9 @@ def hibernate(seconds = seconds_between_checks):
 
 if __name__ == "__main__":
     # Uncomment if you want to test your local sound
-    # test_sound()
+    test_sound(3)
+    exit()
 
     send_message('Starting the scraper.')
     # Set initial_pay = True for scheduling appointment, False to rescheduling
-    run_visa_scraper(urls, initial_pay = False)
+    run_visa_scraper(urls, initial_pay = True)

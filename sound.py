@@ -1,15 +1,19 @@
+import time
+
 import simpleaudio as sa
 
 def play_sound(rep):
     try:
         for _ in range(rep):
             wave_obj = sa.WaveObject.from_wave_file("audio/uti-puti.wav")
-            play_obj = wave_obj.play()
-            play_obj.wait_done()
+            wave_obj.play().wait_done()
+            time.sleep(1)
     except:
         print("Cannot play sound")
         pass
 
-def test_sound():
+def test_sound(rep = 1):
     wave_obj = sa.WaveObject.from_wave_file("audio/vot.wav")
-    wave_obj.play().wait_done()
+    for _ in range(rep):
+        wave_obj.play()
+        time.sleep(5)
