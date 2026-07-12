@@ -191,10 +191,16 @@ wheels = [
 ]
 
 [[package]]
-name = "simpleaudio"
-version = "1.0.4"
+name = "simpleaudio-patched"
+version = "1.0.5"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/94/1b/4dc29653733202b68c09d9c6ca085cf67ac54859ee860647ef21ac1ff3dc/simpleaudio-1.0.4.tar.gz", hash = "sha256:691c88649243544db717e7edf6a9831df112104e1aefb5f6038a5d071e8cf41d", size = 2042564, upload-time = "2019-11-29T03:56:28.965Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/88/dd/c077921fd728e73ddc44aa265602a9371385b9f82f130a4e9324b44b9dbd/simpleaudio_patched-1.0.5.tar.gz", hash = "sha256:f34d8ec7fb175fc054d84b1642ea8ecaa4f49a0d0661d98850ec400dcfdfb004", size = 2044621, upload-time = "2024-05-27T13:49:24.748Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/31/9c/6ea128b9516d49e00ab271ec502d581e691fb8d634078b33d66ac77f5dfc/simpleaudio_patched-1.0.5-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:ccb9cbca11bf2ee10e1617579463dad0f8b28075d060026c794a80bedf9fd388", size = 2038057, upload-time = "2024-05-19T09:15:40.272Z" },
+    { url = "https://files.pythonhosted.org/packages/56/2c/4dae5acbcfb5a8debdb9b3b8e8579673444dc5dac25844be538b0a7ec118/simpleaudio_patched-1.0.5-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:8597c316ea69a4f36e6eb18a100925c08d36fe2e8e10044f7083db3502374fa7", size = 2038452, upload-time = "2024-05-19T09:15:42.208Z" },
+    { url = "https://files.pythonhosted.org/packages/f8/fe/096c64ce5a444aa24dc38a7d53bf7988f92479f2301562e1ab4399dfe7c5/simpleaudio_patched-1.0.5-cp312-cp312-win32.whl", hash = "sha256:6de2c6a150e56ed3fce74b992d673ba2eb065abf8b3a4d419a8ef213fb990847", size = 2039793, upload-time = "2024-05-19T09:15:43.587Z" },
+    { url = "https://files.pythonhosted.org/packages/ac/df/00d4897e1d3d4c6349a6675cb9495a48e894c0b1f39d547e56c4a18900b8/simpleaudio_patched-1.0.5-cp312-cp312-win_amd64.whl", hash = "sha256:d64053e1c8e4088449f0e6913209fc0cb799a6e77e23a45088f21da16fdb0ed8", size = 2040339, upload-time = "2024-05-19T09:15:45.107Z" },
+]
 
 [[package]]
 name = "sniffio"
@@ -275,14 +281,14 @@ source = { virtual = "." }
 dependencies = [
     { name = "requests" },
     { name = "selenium" },
-    { name = "simpleaudio" },
+    { name = "simpleaudio-patched" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "requests", specifier = ">=2.34.2" },
     { name = "selenium", specifier = ">=4.45.0" },
-    { name = "simpleaudio", specifier = ">=1.0.4" },
+    { name = "simpleaudio-patched", specifier = ">=1.0.5" },
 ]
 
 [[package]]

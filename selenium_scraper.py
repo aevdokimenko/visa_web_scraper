@@ -119,19 +119,21 @@ def is_appointment_available(u):
         print_exception(e)
         return False
 
-
     # Getting main text
     try:
         cell_text = driver.find_element("xpath","(//div[@id='paymentOptions']/div[contains(@class,'column')])[2]").text
     except Exception as e:
+        driver.save_screenshot(f"screenshot_{int(time.time())}.png")
         print_exception(e, "Cannot find cell")
-        return False
-    if cell_text == '!First Available Appointments\nAstana No Appointments Available\nAlmaty No Appointments Available':
+        return True
+    if cell_text == 'First Available Appointments\nAstana No Appointments Available\nAlmaty No Appointments Available':
         return False
     print(cell_text)
     # Can add additional logic here if needed
     # if "2023" in cell_text:
+    # if "2023" in cell_text:
     #    return  True #"May" in cell_text or "June" in cell_text
+    driver.save_screenshot(f"screenshot_{int(time.time())}.png")
     return True
 
 def is_reschedule_available(u):
@@ -242,8 +244,7 @@ def hibernate(seconds = seconds_between_checks):
 
 if __name__ == "__main__":
     # Uncomment if you want to test your local sound
-    test_sound(3)
-    exit()
+    # test_sound(3)
 
     send_message('Starting the scraper.')
     # Set initial_pay = True for scheduling appointment, False to rescheduling
