@@ -15,7 +15,7 @@ base_url = f'https://ais.usvisa-info.com/en-'
 
 heart_beat = 0
 cell_text = ''
-seconds_between_checks = 119
+seconds_between_checks = 179
 heart_beat_count = 1000   # Send heartbeet message after running this number of checks
 driver = None
 chrome_options = None
@@ -27,7 +27,7 @@ def init_driver():
     chrome_options.add_argument("--disable-extensions")
     chrome_options.add_argument("--disable-gpu")
     # chrome_options.add_argument("--no-sandbox") # linux only
-    #chrome_options.add_argument("--headless") # Comment for visualy debugging, uncomment for headless runs
+    # chrome_options.add_argument("--headless") # Comment for visualy debugging, uncomment for headless runs
 
     connected = False
     while not connected:
@@ -120,12 +120,14 @@ def is_appointment_available(u):
         return False
 
     # Getting main text
+    time.sleep(1)
     try:
         cell_text = driver.find_element("xpath","(//div[@id='paymentOptions']/div[contains(@class,'column')])[2]").text
     except Exception as e:
         driver.save_screenshot(f"screenshot_{int(time.time())}.png")
         print_exception(e, "Cannot find cell")
-        return True
+        return False
+    
     if cell_text == 'First Available Appointments\nAstana No Appointments Available\nAlmaty No Appointments Available':
         return False
     print(cell_text)
