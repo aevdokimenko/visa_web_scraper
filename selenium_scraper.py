@@ -78,8 +78,11 @@ def is_logged_in(url):
                     '//*[@id="sign_in_form"]/p[1]/input').click()
 
                 # Logging to screen
-                prn('Logged in.')
                 time.sleep(1)
+                if not "Applicant Summary Page" in driver.title:
+                    prn('Failed to log in.')
+                    return False
+                prn('Logged in.')
             except Exception as e:
                 print_exception(e, 'Cannot log in.')
                 return False
@@ -108,6 +111,8 @@ def is_appointment_available(u):
     url = base_url + u[1]
     try:
         if driver.current_url != url:
+            driver.get(url)
+        if "Applicant Summary Page" in driver.title:
             driver.get(url)
         if "429" in driver.title:
             prn('429 error: too many requessts')

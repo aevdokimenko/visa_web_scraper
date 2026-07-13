@@ -39,5 +39,5 @@ def send_photo(photo_file):
 
 if __name__ == "__main__":
     import pprint as pp
-    response = send_photo('table.png')
+    response = send_message('Starting scrapping')
     pp.pprint(response)

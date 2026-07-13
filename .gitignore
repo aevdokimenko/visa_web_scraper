@@ -3,3 +3,4 @@ archive
 __pycache__
 debugging
 .gitattributes
+screenshot*.png
