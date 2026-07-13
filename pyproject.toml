@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "python-dotenv>=1.2.2",
     "requests>=2.34.2",
     "selenium>=4.45.0",
     "simpleaudio-patched>=1.0.5",

@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 from telegram import send_message, send_photo
-from creds import username, password, urls, look_for_appointments_before
+from config import username, password, urls, look_for_appointments_before
 from sound import play_sound, test_sound
 from helpers import prn, print_exception
 from datetime import datetime
@@ -120,7 +120,7 @@ def is_appointment_available(u):
         return False
 
     # Getting main text
-    time.sleep(1)
+    time.sleep(3)
     try:
         cell_text = driver.find_element("xpath","(//div[@id='paymentOptions']/div[contains(@class,'column')])[2]").text
     except Exception as e:

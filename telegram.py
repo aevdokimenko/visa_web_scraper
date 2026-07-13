@@ -1,5 +1,5 @@
 import requests
-from creds import token, chat_id
+from config import token, chat_id
 from helpers import prn
 
 def send_message(text):
