@@ -81,6 +81,7 @@ def is_logged_in(url):
                 time.sleep(1)
                 if not "Applicant Summary Page" in driver.title:
                     prn('Failed to log in.')
+                    driver.save_screenshot(f"screenshot_{int(time.time())}.png")
                     return False
                 prn('Logged in.')
             except Exception as e:
@@ -114,6 +115,18 @@ def is_appointment_available(u):
             driver.get(url)
         if "Applicant Summary Page" in driver.title:
             driver.get(url)
+        if "Schedule Appointments" in driver.title:
+            # We are at appointment selection page
+            dropdown = driver.find_element(By.NAME, "appointments[consulate_appointment][facility_id]")
+            option = dropdown.find_element(By.XPATH, "//*[@id='appointments_consulate_appointment_facility_id']/option[3]")
+            option.click()
+            time.sleep(5)
+            text = driver.find_element(By.XPATH, "//*[@id='consulate_date_time_not_available']/small").text
+            if "System is busy" in text:
+                return False
+            else:
+                driver.save_screenshot(f"screenshot_{int(time.time())}.png")
+                return True
         if "429" in driver.title:
             prn('429 error: too many requessts')
             return False
@@ -146,7 +159,7 @@ def is_appointment_available(u):
 def is_reschedule_available(u):
     global cell_text
 
-    url = base_url + u[1].replace('payment', 'appointment')
+    url = base_url + u[1].replace('payment', 'appointment?confirmed_limit_message=1&commit=Continue')
     try:
         if driver.current_url != url:
             driver.get(url)
@@ -156,6 +169,13 @@ def is_reschedule_available(u):
         if driver.title == 'ais.usvisa-info.com':
             prn('Empty response')
             return False
+        time.sleep(5)
+        text = driver.find_element(By.XPATH, "//*[@id='consulate_date_time_not_available']/small").text
+        if "System is busy" in text:
+            return False
+        else:
+            driver.save_screenshot(f"screenshot_{int(time.time())}.png")
+            return True
     except Exception as e:
         print_exception(e)
         return False
@@ -255,4 +275,4 @@ if __name__ == "__main__":
 
     send_message('Starting the scraper.')
     # Set initial_pay = True for scheduling appointment, False to rescheduling
-    run_visa_scraper(urls, initial_pay = True)
+    run_visa_scraper(urls, initial_pay = False)

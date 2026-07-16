@@ -4,3 +4,4 @@ __pycache__
 debugging
 .gitattributes
 screenshot*.png
+.DS_Store
