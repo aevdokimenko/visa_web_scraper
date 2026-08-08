@@ -9,6 +9,9 @@ def _check_response(response):
     return data
 
 def send_message(text):
+    if len(text) == 0:
+        prn("No text to send via Telegram")
+        return None
     url = f'https://api.telegram.org/bot{token}/sendMessage'
     parameters = {
         'chat_id': chat_id,

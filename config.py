@@ -26,4 +26,4 @@ urls = [['Kazakhstan', f'kz/niv/schedule/75178318/payment', "(//div[@id='payment
         ]
 
 # Notify for rescheduling only if a new appointment found BEFORE this date
-look_for_appointments_before = datetime(2027, 3, 4)
+months_to_iterate = 20
